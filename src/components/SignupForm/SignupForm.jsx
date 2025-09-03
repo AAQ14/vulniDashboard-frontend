@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import axios from 'axios'
+
 const baseURL = import.meta.env.VITE_BACKEND_URL
 
 const SignupForm = () => {
