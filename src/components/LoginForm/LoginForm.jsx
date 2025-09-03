@@ -28,7 +28,7 @@ const LoginForm = ({onLogin}) => {
     <>
         <h2>Login form</h2>
         <form onSubmit={handleSubmit}>
-            <input placeholder='email' value={email} onChange={event=>setEmail(event.target.value)}/>
+            <input placeholder='email' value={email} onChange={event=>setEmail(event.target.value)} type='email'/>
             <input placeholder='password' value={password} onChange={event=>setPassword(event.target.value)}/>
             <button type='submit'>Login</button>
         </form>
