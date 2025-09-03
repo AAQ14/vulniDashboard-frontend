@@ -10,7 +10,6 @@ const NavBar = (props) => {
         <Link to="/applications">Applications</Link>
         <Link to="/profile">profile</Link> </>: <>
         <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
         </>}
         
         

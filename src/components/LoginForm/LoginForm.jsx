@@ -2,13 +2,14 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router'
 
 const baseURL = import.meta.env.VITE_BACKEND_URL
 
 const LoginForm = ({onLogin}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const handleSubmit = async event =>{
         event.preventDefault()
@@ -17,7 +18,7 @@ const LoginForm = ({onLogin}) => {
             const res = await axios.post(url, {email,password})
             localStorage.setItem('token', res.data.token)
             onLogin(res.data.token)
-            // navigate("/")
+            navigate("/")
         } catch (err) {
             alert(err.response?.data?.message || 'Login failed')
         }
@@ -31,6 +32,7 @@ const LoginForm = ({onLogin}) => {
             <input placeholder='password' value={password} onChange={event=>setPassword(event.target.value)}/>
             <button type='submit'>Login</button>
         </form>
+        <p>no account? <Link to="/signup">Signup</Link> </p>
     </>
   )
 }

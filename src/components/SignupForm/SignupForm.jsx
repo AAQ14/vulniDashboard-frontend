@@ -9,7 +9,7 @@ const SignupForm = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const handleSubmit = async (event)=>{
         event.preventDefault()
@@ -17,7 +17,7 @@ const SignupForm = () => {
             const url = `${baseURL}/auth/signup`
             await axios.post(url,{username, email,password})
             alert('User registered, please login')
-            // navigate('/login')
+            navigate('/login')
         } catch (err) {
             alert(err.response?.data?.message || 'Registeration failed')            
         }
