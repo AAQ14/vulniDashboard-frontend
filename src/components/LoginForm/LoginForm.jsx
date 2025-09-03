@@ -15,7 +15,7 @@ const LoginForm = ({onLogin}) => {
         try {
             const url = `${baseURL}/auth/login`
             const res = await axios.post(url, {email,password})
-            localStorage.getItem('token', res.data.token)
+            localStorage.setItem('token', res.data.token)
             onLogin(res.data.token)
             // navigate("/")
         } catch (err) {

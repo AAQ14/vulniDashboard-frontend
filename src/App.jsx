@@ -10,6 +10,7 @@ import Vulnerabilities from './components/Vulnerabilities/Vulnerabilities'
 import Applications from './components/Applications/Applications'
 import NavBar from './components/NavBar/NavBar'
 import LogoutBtn from './components/LogoutBtn/LogoutBtn'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'))
@@ -33,14 +34,14 @@ const App = () => {
     <>
       
       <BrowserRouter>
-      < NavBar/> 
+      < NavBar token={token}/> 
       {token ? <LogoutBtn onLogout={handleLogout} /> : null}
         <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/login" element={<LoginForm onLogin={handleLogin}/>}/>
             <Route path="/signup" element={<SignupForm />}/>
-            <Route path="/vulnerabilities" element={<Vulnerabilities />}/>
-            <Route path="/applications" element={<Applications />}/>
+            <Route path="/applications" element={<ProtectedRoute><Applications /></ProtectedRoute>}/>
+            <Route path="/vulnerabilities" element={<ProtectedRoute> <Vulnerabilities /> </ProtectedRoute>}/>
         </Routes>
       </BrowserRouter>
     </>
