@@ -9,6 +9,7 @@ import Home from './components/Home/Home'
 import Vulnerabilities from './components/Vulnerabilities/Vulnerabilities'
 import Applications from './components/Applications/Applications'
 import NavBar from './components/NavBar/NavBar'
+import LogoutBtn from './components/LogoutBtn/LogoutBtn'
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'))
@@ -32,10 +33,11 @@ const App = () => {
     <>
       
       <BrowserRouter>
-      < NavBar/>
+      < NavBar/> 
+      {token ? <LogoutBtn onLogout={handleLogout} /> : null}
         <Routes>
             <Route path="/" element={<Home />}/>
-            <Route path="/login" element={<LoginForm />}/>
+            <Route path="/login" element={<LoginForm onLogin={handleLogin}/>}/>
             <Route path="/signup" element={<SignupForm />}/>
             <Route path="/vulnerabilities" element={<Vulnerabilities />}/>
             <Route path="/applications" element={<Applications />}/>

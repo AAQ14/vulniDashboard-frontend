@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 
 const baseURL = import.meta.env.VITE_BACKEND_URL
 
-const LoginForm = () => {
+const LoginForm = ({onLogin}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     // const navigate = useNavigate()
