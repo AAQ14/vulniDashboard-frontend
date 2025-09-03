@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const baseURL = import.meta.env.VITE_BACKEND_URL
 
-const SignupForm = () => {
+const SignupForm = ({onLogin}) => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -15,9 +15,11 @@ const SignupForm = () => {
         event.preventDefault()
         try {
             const url = `${baseURL}/auth/signup`
-            await axios.post(url,{username, email,password})
-            alert('User registered, please login')
-            navigate('/login')
+            const res = await axios.post(url, {username, email,password})
+            // console.log("this is the token", res.data.token)
+            localStorage.setItem('token', res.data.token)
+            onLogin(res.data.token)
+            navigate('/')
         } catch (err) {
             alert(err.response?.data?.message || 'Registeration failed')            
         }
