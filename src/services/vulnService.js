@@ -41,3 +41,20 @@ const details = async(id) =>{
     }
 }
 
+const deleteVuln = async(id) =>{
+    try {
+        const url = `${baseURI}/vulnerabilities/delete/${id}`
+        const res = axios.delete(url)
+        return res
+    } catch (err) {
+        return err
+    }
+}
+
+export{
+    add,
+    index,
+    update,
+    details,
+    deleteVuln
+}
