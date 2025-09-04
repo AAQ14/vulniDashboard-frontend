@@ -21,3 +21,13 @@ const index = async() =>{
     }
 }
 
+const update = async(id, data) =>{
+    try {
+        const url = `${baseURI}/vulnerabilities/update/${id}`
+        const res = axios.put(url, data)
+        return res
+    } catch (err) {
+        return err
+    }
+}
+
