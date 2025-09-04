@@ -31,3 +31,13 @@ const update = async(id, data) =>{
     }
 }
 
+const details = async(id) =>{
+    try {
+        const url = `${baseURI}/vulnerabilities/${id}`
+        const res = axios.get(url)
+        return res.data
+    } catch (err) {
+        return err
+    }
+}
+
