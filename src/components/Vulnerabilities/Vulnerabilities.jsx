@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { add, deleteVuln, update, index, details } from '../../services/vulnService'
+import { deleteVuln, index, details } from '../../services/vulnService'
+import VulnerabilityForm from './VulnerabilityForm/VulnerabilityForm'
 
 const Vulnerabilities = () => {
       const [vulnerabilities, setVulnerabilities] = useState([])
+      const [isFormOpen, setIsFormOpen] = useState(false)
 
       async function getAllVulns() {
          try {
@@ -14,13 +16,20 @@ const Vulnerabilities = () => {
          }
       }
 
+      function handleFormView(){
+        setIsFormOpen(!isFormOpen)
+      }
+
       useEffect(()=>{
         getAllVulns()
       }, [])
 
   return (
     <>
-      <h1>All Vulnerabilities</h1>
+      <br/>
+      
+      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView}/> : <><h1>All Vulnerabilities</h1>
+      <button onClick={handleFormView}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
       {vulnerabilities?.map(vuln => (
           <>
             <p>title: {vuln.title}</p>
@@ -30,7 +39,9 @@ const Vulnerabilities = () => {
             <p>status: {vuln.status}</p>
             <hr/>
           </>
-      ))}
+      ))}</>}
+      
+      
     </>
   )
 }
