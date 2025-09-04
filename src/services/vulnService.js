@@ -11,3 +11,13 @@ const add = async(data) =>{
     }
 }
 
+const index = async() =>{
+    try {
+        const url = `${baseURI}/vulnerabilities/`
+        const res = axios.get(url)
+        return res.data
+    } catch (err) {
+        return err
+    }
+}
+
