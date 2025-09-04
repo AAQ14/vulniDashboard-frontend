@@ -4,7 +4,7 @@ const baseURI = import.meta.env.VITE_BACKEND_URL
 const add = async(data) =>{
     try {
         const url  = `${baseURI}/vulnerabilities/add`
-        const res = axios.post(url, data)
+        const res = await axios.post(url, data)
         return res
     } catch (err) {
         return err
@@ -14,7 +14,7 @@ const add = async(data) =>{
 const index = async() =>{
     try {
         const url = `${baseURI}/vulnerabilities/`
-        const res = axios.get(url)
+        const res = await axios.get(url)
         return res.data
     } catch (err) {
         return err
@@ -24,7 +24,7 @@ const index = async() =>{
 const update = async(id, data) =>{
     try {
         const url = `${baseURI}/vulnerabilities/update/${id}`
-        const res = axios.put(url, data)
+        const res = await axios.put(url, data)
         return res
     } catch (err) {
         return err
@@ -34,7 +34,7 @@ const update = async(id, data) =>{
 const details = async(id) =>{
     try {
         const url = `${baseURI}/vulnerabilities/${id}`
-        const res = axios.get(url)
+        const res = await axios.get(url)
         return res.data
     } catch (err) {
         return err
@@ -44,7 +44,7 @@ const details = async(id) =>{
 const deleteVuln = async(id) =>{
     try {
         const url = `${baseURI}/vulnerabilities/delete/${id}`
-        const res = axios.delete(url)
+        const res = await axios.delete(url)
         return res
     } catch (err) {
         return err
