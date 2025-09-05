@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { addApp, updateApp } from '../../../services/appService'
 
-const ApplicationForm = ({getAllApps, handleFormView, selectedApp}) => {
+const ApplicationForm = ({getAllApps, handleFormView, selectedApp, getAppDetails}) => {
 
   const initialState = {
     appName : '',
@@ -41,6 +41,7 @@ const ApplicationForm = ({getAllApps, handleFormView, selectedApp}) => {
       try {
         const res = await updateApp(selectedApp._id, formData)
         if(res.status == 200){
+          getAppDetails()
           getAllApps()
           handleFormView()
         }

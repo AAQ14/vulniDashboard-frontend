@@ -1,8 +1,8 @@
 import React from 'react'
 import { deleteApp } from '../../../services/appService'
 
-const AppDetails = ({handleDetailsView, selectedApp,getAllApps, setFormIsShown}) => {
-  // console.log(selectedApp)
+const AppDetails = ({handleDetailsView, selectedApp,getAllApps, handleFormView}) => {
+  // Q: I passed props here to application Form but it didn't work? 
   return (
     <>
       <h1>App details</h1>
@@ -11,7 +11,7 @@ const AppDetails = ({handleDetailsView, selectedApp,getAllApps, setFormIsShown})
       <p>identifier: {selectedApp.identifier}</p>
       <p>owner: {selectedApp.owner}</p>
       <button onClick={async()=>{await deleteApp(selectedApp._id);getAllApps(); handleDetailsView();}}>DELETE</button>
-      <button onClick={()=>{setFormIsShown(true)}}>update</button>
+      <button onClick={()=>{handleFormView()}}>update</button>
       <button onClick={handleDetailsView}>BACK</button>
     </>
   )

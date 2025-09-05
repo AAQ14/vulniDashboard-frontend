@@ -31,14 +31,24 @@ const Applications = () => {
     setFormIsShown(!formIsShown)
   }
 
-  useEffect(()=>{getAllApps()},[])
+    async function getAppDetails(){
+    try {
+       const res = await appDetails(selectedApp?._id)
+       setSelectedApp(res)
+    } catch (err) {
+      console.log(err)
+      return err
+    }
+  }
+
+  useEffect(()=>{getAllApps();getAppDetails();},[])
 
   return (
     <>
       < br/>
       < br/>
-      {formIsShown? <ApplicationForm selectedApp={selectedApp} handleFormView={handleFormView} getAllApps={getAllApps}/> :
-      detailsView ? <AppDetails selectedApp={selectedApp} handleDetailsView={handleDetailsView} setFormIsShown={setFormIsShown}  getAllApps={getAllApps}/> : 
+      {formIsShown? <ApplicationForm handleFormView={handleFormView} selectedApp={selectedApp} getAllApps={getAllApps} getAppDetails={getAppDetails}/> :
+      detailsView ? <AppDetails selectedApp={selectedApp} handleDetailsView={handleDetailsView} handleFormView={handleFormView} getAllApps={getAllApps}/> : 
       <>
         <button  onClick={()=>{setSelectedApp(null); handleFormView();}}>Add App</button>
         <h1>Applications</h1>
