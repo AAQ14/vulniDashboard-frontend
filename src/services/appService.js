@@ -44,3 +44,13 @@ const updateApp = async(id, data) =>{
     }
 }
 
+const deleteApp = async(id) =>{
+    try {
+        const url = `${baseURI}/applications/delete/${id}`
+        const res = await axios.delete(url)
+        return res
+    } catch (err) {
+        return err
+    }
+}
+
