@@ -1,8 +1,17 @@
 import React from 'react'
+import { deleteApp, updateApp } from '../../../services/appService'
 
-const AppDetails = () => {
+const AppDetails = ({handleDetailsView, selectedApp}) => {
+  console.log(selectedApp)
   return (
-    <div>AppDetails</div>
+    <>
+      <h1>App details</h1>
+      <p>name: {selectedApp.appName}</p>
+      <p>type: {selectedApp.type}</p>
+      <p>identifier: {selectedApp.identifier}</p>
+      <p>owner: {selectedApp.owner}</p>
+      <button onClick={handleDetailsView}>BACK</button>
+    </>
   )
 }
 
