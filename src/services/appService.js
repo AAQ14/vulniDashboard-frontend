@@ -33,3 +33,14 @@ const appDetails = async (id) =>{
         return err
     }
 }
+
+const updateApp = async(id, data) =>{
+    try {
+        const url = `${baseURI}/applications/update/${id}`
+        const res = await axios.put(url, data)
+        return res
+    } catch (err) {
+        return err        
+    }
+}
+
