@@ -6,6 +6,7 @@ import { FadeLoader } from 'react-spinners'
 const Vulnerabilities = () => {
       const [vulnerabilities, setVulnerabilities] = useState([])
       const [isFormOpen, setIsFormOpen] = useState(false)
+      const [selected, setSelected] = useState(null)
 
       async function getAllVulns() {
          try {
@@ -21,6 +22,10 @@ const Vulnerabilities = () => {
         setIsFormOpen(!isFormOpen)
       }
 
+      function handleSelected(vuln){
+          setSelected(vuln)
+      }
+
       useEffect(()=>{
         getAllVulns()
       }, [])
@@ -28,11 +33,10 @@ const Vulnerabilities = () => {
   return (
     <>
       <br/>
-      
-      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns}/> : vulnerabilities.length ? <><h1>All Vulnerabilities</h1>
-      <button onClick={handleFormView}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
-      {vulnerabilities?.map(vuln => (
-          <>
+      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected}/> : vulnerabilities.length ? <><h1>All Vulnerabilities</h1>
+      <button onClick={()=>{handleSelected(null); handleFormView();}}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
+      {vulnerabilities?.map((vuln, index) => (
+          <div key={index}>
             <p>title: {vuln.title}</p>
             <p>rating: {vuln.rating}</p>
             <p>score: {vuln.score}</p>
@@ -40,9 +44,19 @@ const Vulnerabilities = () => {
             <p>app: {vuln.app?.appName}</p>
             <p>status: {vuln.status}</p>
             <p>Discovered at: {vuln.discoveredAt}</p>
+            <p>resolved at: {vuln.resolvedAt}</p>
+            
+            <button  onClick={()=>{handleSelected(vuln); handleFormView();}}>Update</button>
             <hr/>
-          </>
-      ))}</> : <FadeLoader color='white' />}
+          </div>
+      ))}
+       
+      </> : vulnerabilities.length==0 ? 
+      <>
+       <button onClick={()=>{handleSelected(null); handleFormView();}}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
+        <p>no vulnerabilities</p>
+      </>      
+      :<FadeLoader color='white' />}
       
       
     </>
