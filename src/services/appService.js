@@ -54,3 +54,10 @@ const deleteApp = async(id) =>{
     }
 }
 
+export{
+    addApp,
+    appIndex,
+    appDetails,
+    updateApp,
+    deleteApp
+}
