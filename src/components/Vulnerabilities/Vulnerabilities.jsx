@@ -18,6 +18,8 @@ const Vulnerabilities = () => {
          }
       }
 
+      // console.log("these are vulnerss",vulnerabilities) Q
+
       function handleFormView(){
         setIsFormOpen(!isFormOpen)
       }
