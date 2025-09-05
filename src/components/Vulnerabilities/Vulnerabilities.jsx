@@ -28,7 +28,7 @@ const Vulnerabilities = () => {
     <>
       <br/>
       
-      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView}/> : <><h1>All Vulnerabilities</h1>
+      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns}/> : <><h1>All Vulnerabilities</h1>
       <button onClick={handleFormView}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
       {vulnerabilities?.map(vuln => (
           <>
@@ -36,6 +36,7 @@ const Vulnerabilities = () => {
             <p>rating: {vuln.rating}</p>
             <p>score: {vuln.score}</p>
             <p>description: {vuln.description}</p>
+            <p>app: {vuln.app?.appName}</p>
             <p>status: {vuln.status}</p>
             <hr/>
           </>
