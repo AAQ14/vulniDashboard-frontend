@@ -38,7 +38,7 @@ const Applications = () => {
       < br/>
       < br/>
       {formIsShown? <ApplicationForm selectedApp={selectedApp} handleFormView={handleFormView} getAllApps={getAllApps}/> :
-      detailsView ? <AppDetails selectedApp={selectedApp} handleDetailsView={handleDetailsView} handleFormView={handleFormView}/> : 
+      detailsView ? <AppDetails selectedApp={selectedApp} handleDetailsView={handleDetailsView} setFormIsShown={setFormIsShown}  getAllApps={getAllApps}/> : 
       <>
         <button  onClick={()=>{setSelectedApp(null); handleFormView();}}>Add App</button>
         <h1>Applications</h1>
