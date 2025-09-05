@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
-import { addApp } from '../../../services/appService'
+import { addApp, updateApp } from '../../../services/appService'
 
-const ApplicationForm = ({getAllApps, handleFormView}) => {
+const ApplicationForm = ({getAllApps, handleFormView, selectedApp}) => {
+
   const initialState = {
     appName : '',
     type: '',
     identifier: '',
     owner: ''
   }
-  const [formData, setFormData] = useState( initialState)
+  const [formData, setFormData] = useState( selectedApp ? selectedApp :initialState)
+
+  console.log("this is form data: ", formData)
 
   function handleChange(evt)
   {
@@ -18,7 +21,7 @@ const ApplicationForm = ({getAllApps, handleFormView}) => {
 
   function handleSubmit(evt){
     evt.preventDefault();
-    handleAdd()
+    selectedApp ? handleUpdate() : handleAdd()
   }
 
   async function handleAdd(){
@@ -34,15 +37,26 @@ const ApplicationForm = ({getAllApps, handleFormView}) => {
     }
   }
 
-  async function handleUpdate() {}
+  async function handleUpdate(){
+      try {
+        const res = await updateApp(selectedApp._id, formData)
+        if(res.status == 200){
+          getAllApps()
+          handleFormView()
+        }
+      } catch (err) {
+        console.log(err)
+        return err
+      }
+  }
   return (
     <>
       <h1>Add new app</h1>
       <form onSubmit={handleSubmit}>
          <label htmlFor="name">name: </label>
-         <input type="text" id='name' name='appName' onChange={handleChange} required />
+         <input type="text" id='name' name='appName' onChange={handleChange} value={formData.appName} required />
 
-         <select name="type" onChange={handleChange}>
+         <select name="type" onChange={handleChange} value={formData.type}>
             <option value="web app">web app</option>
             <option value="server">server</option>
             <option value="network">network</option>
@@ -51,11 +65,11 @@ const ApplicationForm = ({getAllApps, handleFormView}) => {
             <option value="database server">database server</option>
          </select>
 
-         <label htmlFor="identifier">identifier: </label>
-         <input type="text" id='identifier' name='identifier' onChange={handleChange} required />
+         <label htmlFor="identifier" >identifier: </label>
+         <input type="text" id='identifier' name='identifier' onChange={handleChange} value={formData.identifier} required />
 
         <label htmlFor="owner">owner: </label>
-        <input type="text" id='owner' name='owner' onChange={handleChange} required />
+        <input type="text" id='owner' name='owner' onChange={handleChange} value={formData.owner} required />
 
         <button>add</button>
       </form>

@@ -37,10 +37,10 @@ const Applications = () => {
     <>
       < br/>
       < br/>
-      {formIsShown? <ApplicationForm handleFormView={handleFormView} getAllApps={getAllApps}/> :
-      detailsView ? <AppDetails selectedApp={selectedApp} handleDetailsView={handleDetailsView}/> : 
+      {formIsShown? <ApplicationForm selectedApp={selectedApp} handleFormView={handleFormView} getAllApps={getAllApps}/> :
+      detailsView ? <AppDetails selectedApp={selectedApp} handleDetailsView={handleDetailsView} handleFormView={handleFormView}/> : 
       <>
-        <button onClick={handleFormView}>Add App</button>
+        <button  onClick={()=>{setSelectedApp(null); handleFormView();}}>Add App</button>
         <h1>Applications</h1>
         {apps.map((app, index) => (
         <div key={index}>

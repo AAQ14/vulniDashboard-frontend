@@ -1,8 +1,8 @@
 import React from 'react'
-import { deleteApp, updateApp } from '../../../services/appService'
+import { deleteApp } from '../../../services/appService'
 
-const AppDetails = ({handleDetailsView, selectedApp}) => {
-  console.log(selectedApp)
+const AppDetails = ({handleDetailsView, selectedApp, handleFormView}) => {
+  // console.log(selectedApp)
   return (
     <>
       <h1>App details</h1>
@@ -10,6 +10,7 @@ const AppDetails = ({handleDetailsView, selectedApp}) => {
       <p>type: {selectedApp.type}</p>
       <p>identifier: {selectedApp.identifier}</p>
       <p>owner: {selectedApp.owner}</p>
+      <button onClick={handleFormView}>update</button>
       <button onClick={handleDetailsView}>BACK</button>
     </>
   )
