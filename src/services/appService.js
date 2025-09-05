@@ -14,4 +14,13 @@ const addApp = async(data) =>{
     }
 }
 
+const appIndex = async() =>{
+    try {
+        const url = `${baseURI}/applications/`
+        const res = await axios.get(url)
+        return res.data
+    } catch (err) {
+        return err
+    }
+}
 
