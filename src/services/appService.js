@@ -24,3 +24,12 @@ const appIndex = async() =>{
     }
 }
 
+const appDetails = async (id) =>{
+    try {
+        const url = `${baseURI}/applications/${id}` 
+        const res = await axios.get(url)
+        return res.data      
+    } catch (err) {
+        return err
+    }
+}
