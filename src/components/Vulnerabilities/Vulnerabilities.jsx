@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { deleteVuln, index, details } from '../../services/vulnService'
 import VulnerabilityForm from './VulnerabilityForm/VulnerabilityForm'
+import { FadeLoader } from 'react-spinners'
 
 const Vulnerabilities = () => {
       const [vulnerabilities, setVulnerabilities] = useState([])
@@ -28,7 +29,7 @@ const Vulnerabilities = () => {
     <>
       <br/>
       
-      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns}/> : <><h1>All Vulnerabilities</h1>
+      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns}/> : vulnerabilities.length ? <><h1>All Vulnerabilities</h1>
       <button onClick={handleFormView}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
       {vulnerabilities?.map(vuln => (
           <>
@@ -38,9 +39,10 @@ const Vulnerabilities = () => {
             <p>description: {vuln.description}</p>
             <p>app: {vuln.app?.appName}</p>
             <p>status: {vuln.status}</p>
+            <p>Discovered at: {vuln.discoveredAt}</p>
             <hr/>
           </>
-      ))}</>}
+      ))}</> : <FadeLoader color='white' />}
       
       
     </>
