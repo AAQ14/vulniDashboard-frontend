@@ -48,6 +48,8 @@ const Vulnerabilities = () => {
             <p>Discovered at: {vuln.discoveredAt}</p>
             <p>resolved at: {vuln.resolvedAt}</p>
             
+            <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns()}}>Delete</button>
+
             <button  onClick={()=>{handleSelected(vuln); handleFormView();}}>Update</button>
             <hr/>
           </div>
