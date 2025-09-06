@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addApp, updateApp } from '../../../services/appService'
+import { addApp, updateApp } from '../../../services/assetService'
 
 const ApplicationForm = ({getAllApps, handleFormView, selectedApp, getAppDetails}) => {
 
@@ -72,7 +72,7 @@ const ApplicationForm = ({getAllApps, handleFormView, selectedApp, getAppDetails
         <label htmlFor="owner">owner: </label>
         <input type="text" id='owner' name='owner' onChange={handleChange} value={formData.owner} required />
 
-        <button>add</button>
+        <button>{selectedApp? "update" : "add"}</button>
       </form>
       <button onClick={handleFormView}>BACK</button>
     </>

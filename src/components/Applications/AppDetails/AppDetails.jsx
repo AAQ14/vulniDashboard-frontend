@@ -1,5 +1,5 @@
 import React from 'react'
-import { deleteApp } from '../../../services/appService'
+import { deleteApp } from '../../../services/assetService'
 
 const AppDetails = ({handleDetailsView, selectedApp,getAllApps, handleFormView}) => {
   // Q: I passed props here to application Form but it didn't work? 

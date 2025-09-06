@@ -1,5 +1,5 @@
 import React from 'react'
-import { appIndex,appDetails } from '../../services/appService'
+import { appIndex,appDetails } from '../../services/assetService'
 import { useState, useEffect } from 'react'
 
 import AppDetails from './AppDetails/AppDetails'

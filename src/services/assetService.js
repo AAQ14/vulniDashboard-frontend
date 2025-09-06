@@ -1,9 +1,9 @@
 import axios from "axios";
 const baseURI = import.meta.env.VITE_BACKEND_URL
 
-const addApp = async(data) =>{
+const addAsset= async(data) =>{
     try {
-        const url = `${baseURI}/applications/add`
+        const url = `${baseURI}/assets/add`
         const res = await axios.post(url, data)
         if(res.status == 201)
             return res
@@ -14,9 +14,9 @@ const addApp = async(data) =>{
     }
 }
 
-const appIndex = async() =>{
+const assetIndex = async() =>{
     try {
-        const url = `${baseURI}/applications/`
+        const url = `${baseURI}/assets/`
         const res = await axios.get(url)
         return res.data
     } catch (err) {
@@ -24,9 +24,9 @@ const appIndex = async() =>{
     }
 }
 
-const appDetails = async (id) =>{
+const assetDetails = async (id) =>{
     try {
-        const url = `${baseURI}/applications/${id}` 
+        const url = `${baseURI}/assets/${id}` 
         const res = await axios.get(url)
         return res.data      
     } catch (err) {
@@ -34,9 +34,9 @@ const appDetails = async (id) =>{
     }
 }
 
-const updateApp = async(id, data) =>{
+const updateAsset = async(id, data) =>{
     try {
-        const url = `${baseURI}/applications/update/${id}`
+        const url = `${baseURI}/assets/update/${id}`
         const res = await axios.put(url, data)
         return res
     } catch (err) {
@@ -44,9 +44,9 @@ const updateApp = async(id, data) =>{
     }
 }
 
-const deleteApp = async(id) =>{
+const deleteAsset = async(id) =>{
     try {
-        const url = `${baseURI}/applications/delete/${id}`
+        const url = `${baseURI}/assets/delete/${id}`
         const res = await axios.delete(url)
         return res
     } catch (err) {
@@ -55,9 +55,9 @@ const deleteApp = async(id) =>{
 }
 
 export{
-    addApp,
-    appIndex,
-    appDetails,
-    updateApp,
-    deleteApp
+   addAsset,
+   assetDetails,
+   assetIndex,
+   deleteAsset,
+   updateAsset
 }
