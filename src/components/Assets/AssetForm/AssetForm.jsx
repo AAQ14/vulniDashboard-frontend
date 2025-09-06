@@ -50,6 +50,9 @@ const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails
         return err
       }
   }
+
+  const typeOfAssets = ['Web App', 'Mobile App', 'Desktop Software', 'Web Server', 'Database Server', 'Application Server', 'File Server', 'Router', 'Switch', 'Firewall', 'VPN Gateway']
+
   return (
     <>
       <h1>Add new asset</h1>
@@ -58,12 +61,9 @@ const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails
          <input type="text" id='name' name='name' onChange={handleChange} value={formData.name} required />
 
          <select name="type" onChange={handleChange} value={formData.type}>
-            <option value="web app">web app</option>
-            <option value="server">server</option>
-            <option value="network">network</option>
-            <option value="router">router</option>
-            <option value="firewall">firewall</option>
-            <option value="database server">database server</option>
+            {typeOfAssets.map(one => (
+               <option value={one}>{one}</option>
+            ))}
          </select>
 
          <label htmlFor="identifier" >identifier: </label>
