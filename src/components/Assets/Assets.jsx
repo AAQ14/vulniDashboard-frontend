@@ -2,8 +2,8 @@ import React from 'react'
 import { assetDetails, assetIndex } from '../../services/assetService'
 import { useState, useEffect } from 'react'
 
-import AppDetails from './AssetDetails/AssetDetails'
-import ApplicationForm from './ApplicationForm/ApplicationForm'
+import AssetDetails from './AssetDetails/AssetDetails'
+import AssetForm from './AssetForm/AssetForm'
 
 const Assets = () => {
   const [assets, setAssets] = useState([])
@@ -47,8 +47,8 @@ const Assets = () => {
     <>
       < br/>
       < br/>
-      {formIsShown? <ApplicationForm handleFormView={handleFormView} selectedAsset={selectedAsset} getAllAssets={getAllAssets} getAssetDetails={getAssetDetails}/> :
-      detailsView ? <AppDetails selectedAsset={selectedAsset} handleDetailsView={handleDetailsView} handleFormView={handleFormView} getAllAssets={getAllAssets}/> : 
+      {formIsShown? <AssetForm handleFormView={handleFormView} selectedAsset={selectedAsset} getAllAssets={getAllAssets} getAssetDetails={getAssetDetails}/> :
+      detailsView ? <AssetDetails selectedAsset={selectedAsset} handleDetailsView={handleDetailsView} handleFormView={handleFormView} getAllAssets={getAllAssets}/> : 
       <>
         <button  onClick={()=>{setSelectedAsset(null); handleFormView();}}>Add Asset</button>
         <h1>Assets</h1>

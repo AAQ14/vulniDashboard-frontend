@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { addApp, updateApp } from '../../../services/assetService'
+import {addAsset, updateAsset } from '../../../services/assetService'
 
-const ApplicationForm = ({getAllApps, handleFormView, selectedApp, getAppDetails}) => {
+const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails}) => {
 
   const initialState = {
-    appName : '',
+    name : '',
     type: '',
     identifier: '',
     owner: ''
   }
-  const [formData, setFormData] = useState( selectedApp ? selectedApp :initialState)
+  const [formData, setFormData] = useState( selectedAsset ? selectedAsset :initialState)
 
   console.log("this is form data: ", formData)
 
@@ -21,15 +21,15 @@ const ApplicationForm = ({getAllApps, handleFormView, selectedApp, getAppDetails
 
   function handleSubmit(evt){
     evt.preventDefault();
-    selectedApp ? handleUpdate() : handleAdd()
+    selectedAsset ? handleUpdate() : handleAdd()
   }
 
   async function handleAdd(){
     try {
-      const res = await addApp(formData)
+      const res = await addAsset(formData)
       if (res.status == 201)
       {
-        getAllApps()
+        getAllAssets()
         handleFormView()
       }
     } catch (err) {
@@ -39,10 +39,10 @@ const ApplicationForm = ({getAllApps, handleFormView, selectedApp, getAppDetails
 
   async function handleUpdate(){
       try {
-        const res = await updateApp(selectedApp._id, formData)
+        const res = await updateAsset(selectedAsset._id, formData)
         if(res.status == 200){
-          getAppDetails()
-          getAllApps()
+          getAssetDetails()
+          getAllAssets()
           handleFormView()
         }
       } catch (err) {
@@ -52,10 +52,10 @@ const ApplicationForm = ({getAllApps, handleFormView, selectedApp, getAppDetails
   }
   return (
     <>
-      <h1>Add new app</h1>
+      <h1>Add new asset</h1>
       <form onSubmit={handleSubmit}>
          <label htmlFor="name">name: </label>
-         <input type="text" id='name' name='appName' onChange={handleChange} value={formData.appName} required />
+         <input type="text" id='name' name='name' onChange={handleChange} value={formData.name} required />
 
          <select name="type" onChange={handleChange} value={formData.type}>
             <option value="web app">web app</option>
@@ -72,11 +72,11 @@ const ApplicationForm = ({getAllApps, handleFormView, selectedApp, getAppDetails
         <label htmlFor="owner">owner: </label>
         <input type="text" id='owner' name='owner' onChange={handleChange} value={formData.owner} required />
 
-        <button>{selectedApp? "update" : "add"}</button>
+        <button>{selectedAsset? "update" : "add"}</button>
       </form>
       <button onClick={handleFormView}>BACK</button>
     </>
   )
 }
 
-export default ApplicationForm
+export default AssetForm
