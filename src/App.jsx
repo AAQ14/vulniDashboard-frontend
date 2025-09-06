@@ -7,7 +7,7 @@ import SignupForm from './components/SignupForm/SignupForm'
 import LoginForm from './components/LoginForm/LoginForm'
 import Home from './components/Home/Home'
 import Vulnerabilities from './components/Vulnerabilities/Vulnerabilities'
-import Applications from './components/Applications/Applications'
+import Assets from './components/Assets/Assets'
 import NavBar from './components/NavBar/NavBar'
 import LogoutBtn from './components/LogoutBtn/LogoutBtn'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
@@ -40,7 +40,7 @@ const App = () => {
             <Route path="/" element={<Home />}/>
             <Route path="/login" element={<LoginForm onLogin={handleLogin}/>}/>
             <Route path="/signup" element={<SignupForm onLogin={handleLogin} />}/>
-            <Route path="/applications" element={<ProtectedRoute><Applications /></ProtectedRoute>}/>
+            <Route path="/assets" element={<ProtectedRoute><Assets /></ProtectedRoute>}/>
             <Route path="/vulnerabilities" element={<ProtectedRoute> <Vulnerabilities /> </ProtectedRoute>}/>
         </Routes>
       </BrowserRouter>

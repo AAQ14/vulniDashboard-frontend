@@ -7,7 +7,7 @@ const NavBar = (props) => {
         <Link to="/">HOME</Link>
         {props.token ? <>
         <Link to="/vulnerabilities">Vulnerabilities</Link>
-        <Link to="/applications">Applications</Link>
+        <Link to="/assets">Assets</Link>
         <Link to="/profile">profile</Link> </>: <>
         <Link to="/login">Login</Link>
         </>}

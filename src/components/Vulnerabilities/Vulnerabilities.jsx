@@ -43,7 +43,7 @@ const Vulnerabilities = () => {
             <p>rating: {vuln.rating}</p>
             <p>score: {vuln.score}</p>
             <p>description: {vuln.description}</p>
-            <p>app: {vuln.app?.appName}</p>
+            <p>asset: {vuln.asset?.name}</p>
             <p>status: {vuln.status}</p>
             <p>Discovered at: {vuln.discoveredAt}</p>
             <p>resolved at: {vuln.resolvedAt}</p>
