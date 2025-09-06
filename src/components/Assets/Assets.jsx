@@ -54,7 +54,7 @@ const Assets = () => {
         <h1>Assets</h1>
         {assets.map((asset, index) => (
         <div key={index}>
-          <p>name: {asset.assetName}</p>
+          <p>name: {asset.name}</p>
           <p>type: {asset.type}</p>
           <button onClick={()=>{setSelectedAsset(asset);handleDetailsView();}}>details</button>
           <hr />
