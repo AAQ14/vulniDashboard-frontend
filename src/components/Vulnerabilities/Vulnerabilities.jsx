@@ -46,7 +46,6 @@ const Vulnerabilities = () => {
             <p>asset: {vuln.asset?.name}</p>
             <p>status: {vuln.status}</p>
             <p>Discovered at: {vuln.discoveredAt}</p>
-            {console.log(vuln.resolvedAt)}
             <p>resolved at: {vuln.resolvedAt==null? "not solved yet" : vuln.resolvedAt}</p>
             
             <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns()}}>Delete</button>
