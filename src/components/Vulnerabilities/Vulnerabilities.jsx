@@ -58,7 +58,7 @@ const Vulnerabilities = () => {
       </> : vulnerabilities.length==0 ? 
       <>
        <button onClick={()=>{handleSelected(null); handleFormView();}}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
-        <p>no vulnerabilities</p>
+      <p>no vulnerabilities</p>
       </>      
       :<FadeLoader color='white' />}
       

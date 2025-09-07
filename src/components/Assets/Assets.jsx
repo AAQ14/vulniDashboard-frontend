@@ -1,6 +1,7 @@
 import React from 'react'
 import { assetDetails, assetIndex } from '../../services/assetService'
 import { useState, useEffect } from 'react'
+import { FadeLoader } from 'react-spinners'
 
 import AssetDetails from './AssetDetails/AssetDetails'
 import AssetForm from './AssetForm/AssetForm'
@@ -49,6 +50,7 @@ const Assets = () => {
       < br/>
       {formIsShown? <AssetForm handleFormView={handleFormView} selectedAsset={selectedAsset} getAllAssets={getAllAssets} getAssetDetails={getAssetDetails}/> :
       detailsView ? <AssetDetails selectedAsset={selectedAsset} handleDetailsView={handleDetailsView} handleFormView={handleFormView} getAllAssets={getAllAssets}/> : 
+      assets.length ?
       <>
         <button  onClick={()=>{setSelectedAsset(null); handleFormView();}}>Add Asset</button>
         <h1>Assets</h1>
@@ -61,6 +63,14 @@ const Assets = () => {
         </div>
        ))}
       </>
+      :assets.length == 0 ?
+      <>
+        <button  onClick={()=>{setSelectedAsset(null); handleFormView();}}>Add Asset</button>
+        <p>No assets</p>
+      </>
+      
+      :
+      <FadeLoader color='white' />
       }
     </>
   )
