@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { deleteVuln, index, details } from '../../services/vulnService'
 import VulnerabilityForm from './VulnerabilityForm/VulnerabilityForm'
 import { FadeLoader } from 'react-spinners'
+import dayjs from 'dayjs'
 
 const Vulnerabilities = () => {
       const [vulnerabilities, setVulnerabilities] = useState([])
@@ -45,8 +46,8 @@ const Vulnerabilities = () => {
             <p>description: {vuln.description}</p>
             <p>asset: {vuln.asset?.name}</p>
             <p>status: {vuln.status}</p>
-            <p>Discovered at: {vuln.discoveredAt}</p>
-            <p>resolved at: {vuln.resolvedAt==null? "not solved yet" : vuln.resolvedAt}</p>
+            <p>Discovered at: {dayjs(vuln.discoveredAt).format('YYYY/MM/DD HH:mm')}</p>
+            <p>resolved at: {vuln.resolvedAt==null? "not solved yet" : dayjs(vuln.resolvedAt).format('YYYY/MM/DD HH:mm')}</p>
             
             <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns()}}>Delete</button>
 
