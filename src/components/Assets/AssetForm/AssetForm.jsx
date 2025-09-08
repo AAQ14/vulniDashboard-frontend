@@ -62,7 +62,8 @@ const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails
          <label htmlFor="name">name: </label>
          <input type="text" id='name' name='name' onChange={handleChange} value={formData.name} required />
 
-         <select name="type" onChange={handleChange} value={formData.type}>
+         <select name="type" onChange={handleChange} value={formData.type} required>
+            <option value={''} selected disabled>choose an asset type</option>
             {typeOfAssets.map(one => (
                <option value={one}>{one}</option>
             ))}
