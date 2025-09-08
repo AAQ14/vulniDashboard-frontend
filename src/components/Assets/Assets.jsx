@@ -79,6 +79,7 @@ const Assets = () => {
       </>
       :assets.length == 0 ?
       <>
+        <div>{message}</div>
         <button  onClick={()=>{setSelectedAsset(null); handleFormView();}}>Add Asset</button>
         <p>No assets</p>
       </>
