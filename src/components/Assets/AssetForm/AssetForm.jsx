@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import {addAsset, updateAsset } from '../../../services/assetService'
 
-const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails, setStatus}) => {
+const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails, setStatus, username, userId}) => {
 
   const initialState = {
     name : '',
     type: '',
     identifier: '',
-    owner: ''
+    owner: username,
+    user: userId
   }
   const [formData, setFormData] = useState( selectedAsset ? selectedAsset :initialState)
 
@@ -72,8 +73,10 @@ const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails
          <label htmlFor="identifier" >identifier: </label>
          <input type="text" id='identifier' name='identifier' onChange={handleChange} value={formData.identifier} required />
 
-        <label htmlFor="owner">owner: </label>
-        <input type="text" id='owner' name='owner' onChange={handleChange} value={formData.owner} required />
+        {/* <label htmlFor="owner">owner: </label>
+        <input type="text" id='owner' name='owner' onChange={handleChange} value={formData.owner} required /> */}
+
+        <p>owner: {username}</p>
 
         <button>{selectedAsset? "update" : "add"}</button>
       </form>

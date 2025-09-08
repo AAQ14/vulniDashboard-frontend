@@ -44,7 +44,7 @@ const App = () => {
             <Route path="/" element={<Home userId={userId} />}/>
             <Route path="/login" element={<LoginForm onLogin={handleLogin}/>}/>
             <Route path="/signup" element={<SignupForm onLogin={handleLogin} />}/>
-            <Route path="/assets" element={<ProtectedRoute><Assets /></ProtectedRoute>}/>
+            <Route path="/assets" element={<ProtectedRoute><Assets username={username} userId={userId}/></ProtectedRoute>}/>
             <Route path="/vulnerabilities" element={<ProtectedRoute> <Vulnerabilities username={username} userId={userId}/> </ProtectedRoute>}/>
         </Routes>
       </BrowserRouter>

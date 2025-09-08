@@ -6,7 +6,7 @@ import { FadeLoader } from 'react-spinners'
 import AssetDetails from './AssetDetails/AssetDetails'
 import AssetForm from './AssetForm/AssetForm'
 
-const Assets = () => {
+const Assets = ({username, userId}) => {
   const [assets, setAssets] = useState([])
   const [detailsView, setDetailsView] = useState(false)
   const [selectedAsset, setSelectedAsset] = useState({})
@@ -61,7 +61,7 @@ const Assets = () => {
     <>
       < br/>
       < br/>
-      {formIsShown? <AssetForm handleFormView={handleFormView} selectedAsset={selectedAsset} getAllAssets={getAllAssets} getAssetDetails={getAssetDetails} setStatus={setStatus} /> :
+      {formIsShown? <AssetForm handleFormView={handleFormView} selectedAsset={selectedAsset} getAllAssets={getAllAssets} getAssetDetails={getAssetDetails} setStatus={setStatus} username={username} userId={userId} /> :
       detailsView ? <AssetDetails selectedAsset={selectedAsset} handleDetailsView={handleDetailsView} handleFormView={handleFormView} getAllAssets={getAllAssets} status ={status} setStatus={setStatus} setMessage={setMessage} message={message}/> : 
       assets.length ?
       <>
