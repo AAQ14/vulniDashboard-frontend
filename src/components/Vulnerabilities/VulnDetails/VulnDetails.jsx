@@ -16,6 +16,21 @@ const VulnDetails = ({ handleDetailsView, selected, handleFormView, isFormOpen, 
     }
   }
 
+  async function handleDelete()
+  {
+    try {
+      const res = await deleteVuln(vuln._id)
+      if(res.status == 200)
+      {
+        setStatus('deleted')
+        getAllVulns()
+        handleDetailsView()
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     getVulnDetails();
   }, []);
@@ -41,7 +56,7 @@ const VulnDetails = ({ handleDetailsView, selected, handleFormView, isFormOpen, 
           : dayjs(vuln.resolvedAt).format("YYYY/MM/DD HH:mm")}
       </p>
        <button onClick={handleFormView}>UPDATE</button>
-       <button onClick={async()=>{await deleteVuln(vuln._id);getAllVulns();handleDetailsView();}}>DELETE</button>
+       <button onClick={handleDelete}>DELETE</button>
       </>:<FadeLoader />}
       <button onClick={handleDetailsView}>BACK</button>
     </>

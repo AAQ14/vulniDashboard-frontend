@@ -25,8 +25,6 @@ const Vulnerabilities = () => {
          }
       }
 
-      console.log(status)
-
       function displayMessage(){
         if(status == 'updated'){
             setMessage("vulnerability updated successfully")
@@ -34,17 +32,13 @@ const Vulnerabilities = () => {
         }
          if(status == 'added'){
             setMessage("vulnerability created successfully")
-            setTimeout(()=>{setMessage(null)}, 3000)
+            setTimeout(()=>{setMessage(null);setStatus(null);}, 3000)
         }
         if(status== 'deleted'){
             setMessage("vulnerability deleted successfully")
-            setTimeout(()=>{setMessage(null)}, 3000)
+            setTimeout(()=>{setMessage(null);setStatus(null);}, 3000)
         }
       }
-
-
-       console.log("this is message",message)
-      // console.log("these are vulnerss",vulnerabilities) Q
 
       function handleFormView(){
         setIsFormOpen(!isFormOpen)
@@ -78,15 +72,14 @@ const Vulnerabilities = () => {
             <p>rating: {vuln.rating}</p>
             <p>score: {vuln.score}</p>
             <button onClick={()=>{ handleSelected(vuln);handleDetailsView();}}>Details</button>
-            
-            {/* <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns(); setStatus('deleted')}}>Delete</button> */}
             <hr/>
           </div>
       ))}
        
       </> : vulnerabilities.length==0 ? 
       <>
-       <button onClick={()=>{handleSelected(null); handleFormView();}}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
+      <div>{message}</div>
+      <button onClick={()=>{handleSelected(null); handleFormView();}}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
       <p>no vulnerabilities</p>
       </>      
       :<FadeLoader color='white' />}
