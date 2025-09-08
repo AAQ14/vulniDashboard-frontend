@@ -4,8 +4,15 @@ import { FadeLoader } from "react-spinners";
 import { details, deleteVuln } from "../../../services/vulnService";
 import VulnerabilityForm from "../VulnerabilityForm/VulnerabilityForm";
 
-const VulnDetails = ({ handleDetailsView, selected, handleFormView, isFormOpen, getAllVulns, setStatus}) => {
+const VulnDetails = ({ handleDetailsView, selected, handleFormView, isFormOpen, getAllVulns, setStatus, status, message, setMessage}) => {
   const [vuln, setVuln] = useState(null);
+
+    function displayMessage(){
+        if(status == 'updated'){
+            setMessage("vulnerability updated successfully")
+            setTimeout(()=>{setMessage(null);setStatus(null);}, 3000)
+        }
+      }
 
   async function getVulnDetails() {
     try {
@@ -33,12 +40,14 @@ const VulnDetails = ({ handleDetailsView, selected, handleFormView, isFormOpen, 
 
   useEffect(() => {
     getVulnDetails();
-  }, []);
+    displayMessage();
+  }, [status]);
 
   return (
     <>
       {isFormOpen ? <VulnerabilityForm /> :
       vuln? <>
+      <div>{message}</div>
       <h1>VulnDetails</h1>
       <p>title: {vuln.title}</p>
       <p>rating: {vuln.rating}</p>

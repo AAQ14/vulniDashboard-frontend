@@ -26,10 +26,6 @@ const Vulnerabilities = () => {
       }
 
       function displayMessage(){
-        if(status == 'updated'){
-            setMessage("vulnerability updated successfully")
-            setTimeout(()=>{setMessage(null);setStatus(null);}, 3000)
-        }
          if(status == 'added'){
             setMessage("vulnerability created successfully")
             setTimeout(()=>{setMessage(null);setStatus(null);}, 3000)
@@ -61,7 +57,7 @@ const Vulnerabilities = () => {
     <>
       <br/>
       {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected} setStatus={setStatus}/> :
-      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} selected={selected} handleFormView={handleFormView} isFormOpen={isFormOpen} getAllVulns={getAllVulns} setStatus={setStatus}/>:
+      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} selected={selected} handleFormView={handleFormView} isFormOpen={isFormOpen} getAllVulns={getAllVulns} setStatus={setStatus} status={status} setMessage={setMessage} message={message}/>:
       vulnerabilities.length ? 
       <><h1>All Vulnerabilities</h1>
       <div>{message}</div>
