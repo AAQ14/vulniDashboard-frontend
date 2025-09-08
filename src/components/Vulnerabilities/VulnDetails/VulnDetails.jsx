@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { details } from "../../../services/vulnService";
-import { FadeLoader } from "react-spinners";
 import dayjs from "dayjs";
+import { FadeLoader } from "react-spinners";
+import { details } from "../../../services/vulnService";
+import VulnerabilityForm from "../VulnerabilityForm/VulnerabilityForm";
 
-const VulnDetails = ({ handleDetailsView, selected }) => {
+const VulnDetails = ({ handleDetailsView, selected, handleFormView, isFormOpen}) => {
   const [vuln, setVuln] = useState(null);
 
   async function getVulnDetails() {
@@ -21,7 +22,8 @@ const VulnDetails = ({ handleDetailsView, selected }) => {
 
   return (
     <>
-      {vuln? <>
+      {isFormOpen ? <VulnerabilityForm /> :
+      vuln? <>
       <h1>VulnDetails</h1>
       <p>title: {vuln.title}</p>
       <p>rating: {vuln.rating}</p>
@@ -39,6 +41,7 @@ const VulnDetails = ({ handleDetailsView, selected }) => {
           : dayjs(vuln.resolvedAt).format("YYYY/MM/DD HH:mm")}
       </p>
       </>:<FadeLoader />}
+       <button onClick={handleFormView}>UPDATE</button>
       <button onClick={handleDetailsView}>BACK</button>
     </>
   );

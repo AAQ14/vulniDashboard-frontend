@@ -67,7 +67,7 @@ const Vulnerabilities = () => {
     <>
       <br/>
       {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected} setStatus={setStatus}/> :
-      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} selected={selected} />:
+      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} selected={selected} handleFormView={handleFormView} isFormOpen={isFormOpen}/>:
       vulnerabilities.length ? 
       <><h1>All Vulnerabilities</h1>
       <div>{message}</div>
@@ -77,12 +77,9 @@ const Vulnerabilities = () => {
             <p>title: {vuln.title}</p>
             <p>rating: {vuln.rating}</p>
             <p>score: {vuln.score}</p>
-
-            <button onClick={()=>{handleDetailsView(); handleSelected(vuln)}}>Details</button>
+            <button onClick={()=>{ handleSelected(vuln);handleDetailsView();}}>Details</button>
             
             <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns(); setStatus('deleted')}}>Delete</button>
-
-            <button  onClick={()=>{handleSelected(vuln); handleFormView();}}>Update</button>
             <hr/>
           </div>
       ))}
