@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router'
 import { useState } from 'react'
@@ -25,12 +25,12 @@ const App = () => {
     localStorage.removeItem('token')
   }
 
-  if(token){
+  useEffect(()=>{    
+    if(token){
     const decodedToken = jwtDecode(token)
     setUserId(decodedToken.id)
-    console.log(decodedToken)
-  }
-
+    }
+},[token])
 
   return (
     <>
