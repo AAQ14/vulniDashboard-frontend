@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { deleteVuln, index, details } from '../../services/vulnService'
+import { index } from '../../services/vulnService'
 import VulnerabilityForm from './VulnerabilityForm/VulnerabilityForm'
 import VulnDetails from './VulnDetails/VulnDetails'
 import { FadeLoader } from 'react-spinners'
@@ -67,7 +67,7 @@ const Vulnerabilities = () => {
     <>
       <br/>
       {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected} setStatus={setStatus}/> :
-      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} selected={selected} handleFormView={handleFormView} isFormOpen={isFormOpen}/>:
+      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} selected={selected} handleFormView={handleFormView} isFormOpen={isFormOpen} getAllVulns={getAllVulns} setStatus={setStatus}/>:
       vulnerabilities.length ? 
       <><h1>All Vulnerabilities</h1>
       <div>{message}</div>
@@ -79,7 +79,7 @@ const Vulnerabilities = () => {
             <p>score: {vuln.score}</p>
             <button onClick={()=>{ handleSelected(vuln);handleDetailsView();}}>Details</button>
             
-            <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns(); setStatus('deleted')}}>Delete</button>
+            {/* <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns(); setStatus('deleted')}}>Delete</button> */}
             <hr/>
           </div>
       ))}
