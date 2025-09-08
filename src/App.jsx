@@ -14,6 +14,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'))
+  const [userId, setUserId] = useState(null)
 
   function handleLogin(newToken){
     setToken(newToken)
@@ -26,6 +27,7 @@ const App = () => {
 
   if(token){
     const decodedToken = jwtDecode(token)
+    setUserId(decodedToken.id)
     console.log(decodedToken)
   }
 
@@ -37,7 +39,7 @@ const App = () => {
       < NavBar token={token}/> 
       {token ? <LogoutBtn onLogout={handleLogout} /> : null}
         <Routes>
-            <Route path="/" element={<Home />}/>
+            <Route path="/" element={<Home userId={userId} />}/>
             <Route path="/login" element={<LoginForm onLogin={handleLogin}/>}/>
             <Route path="/signup" element={<SignupForm onLogin={handleLogin} />}/>
             <Route path="/assets" element={<ProtectedRoute><Assets /></ProtectedRoute>}/>

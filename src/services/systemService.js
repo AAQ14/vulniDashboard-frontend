@@ -12,6 +12,14 @@ const create = async() =>{
     }
 }
 
+const details = async()=>{
+    try {
+        
+    } catch (err) {
+        return err
+    }
+}
+
 export {
     create
 }
