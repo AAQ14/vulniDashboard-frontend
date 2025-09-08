@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { deleteVuln, index, details } from '../../services/vulnService'
 import VulnerabilityForm from './VulnerabilityForm/VulnerabilityForm'
+import VulnDetails from './VulnDetails/VulnDetails'
 import { FadeLoader } from 'react-spinners'
 import dayjs from 'dayjs'
 
 const Vulnerabilities = () => {
       const [vulnerabilities, setVulnerabilities] = useState([])
       const [isFormOpen, setIsFormOpen] = useState(false)
+      const [isDetailsOpen, setIsDetailsOpen] = useState(false)
       const [selected, setSelected] = useState(null)
       const [message, setMessage] = useState(null)
       const [status, setStatus] = useState(null)
@@ -48,6 +50,10 @@ const Vulnerabilities = () => {
         setIsFormOpen(!isFormOpen)
       }
 
+      function handleDetailsView(){
+        setIsDetailsOpen(!isDetailsOpen)
+      }
+
       function handleSelected(vuln){
           setSelected(vuln)
       }
@@ -60,7 +66,9 @@ const Vulnerabilities = () => {
   return (
     <>
       <br/>
-      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected} setStatus={setStatus}/> : vulnerabilities.length ? 
+      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected} setStatus={setStatus}/> :
+      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} />:
+      vulnerabilities.length ? 
       <><h1>All Vulnerabilities</h1>
       <div>{message}</div>
       <button onClick={()=>{handleSelected(null); handleFormView();}}>{isFormOpen ? 'Back' : 'Add vulnerability'}</button>
@@ -74,6 +82,8 @@ const Vulnerabilities = () => {
             <p>status: {vuln.status}</p>
             <p>Discovered at: {dayjs(vuln.discoveredAt).format('YYYY/MM/DD HH:mm')}</p>
             <p>resolved at: {vuln.resolvedAt==null? "not solved yet" : dayjs(vuln.resolvedAt).format('YYYY/MM/DD HH:mm')}</p>
+
+            <button onClick={handleDetailsView}>Details</button>
             
             <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns(); setStatus('deleted')}}>Delete</button>
 
