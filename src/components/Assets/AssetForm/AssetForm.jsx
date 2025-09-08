@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {addAsset, updateAsset } from '../../../services/assetService'
 
-const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails}) => {
+const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails, setStatus}) => {
 
   const initialState = {
     name : '',
@@ -31,6 +31,7 @@ const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails
       {
         getAllAssets()
         handleFormView()
+        setStatus('added')
       }
     } catch (err) {
       return err
@@ -44,6 +45,7 @@ const AssetForm = ({getAllAssets, handleFormView, selectedAsset, getAssetDetails
           getAssetDetails()
           getAllAssets()
           handleFormView()
+          setStatus('updated')
         }
       } catch (err) {
         console.log(err)

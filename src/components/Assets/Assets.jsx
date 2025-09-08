@@ -11,7 +11,9 @@ const Assets = () => {
   const [detailsView, setDetailsView] = useState(false)
   const [selectedAsset, setSelectedAsset] = useState({})
   const [formIsShown, setFormIsShown] = useState(false)
-
+  const [status, setStatus] = useState(null)
+  const [message, setMessage] = useState(null)
+ 
   async function getAllAssets() {
     try {
       const allAssets = await assetIndex()
@@ -42,17 +44,29 @@ const Assets = () => {
     }
   }
 
-  useEffect(()=>{getAllAssets();getAssetDetails();},[])
+  function showMessage(){
+    if(status == 'added'){
+      setMessage('asset added successfully')
+      setTimeout(()=>{setMessage(null), setStatus(null)}, 3000)
+    } 
+    if(status == 'deleted'){
+          setMessage('asset deleted successfully')
+          setTimeout(()=>{setMessage(null),setStatus(null)}, 3000)
+     }
+  }
+
+  useEffect(()=>{getAllAssets();getAssetDetails();showMessage()},[status])
 
   return (
     <>
       < br/>
       < br/>
-      {formIsShown? <AssetForm handleFormView={handleFormView} selectedAsset={selectedAsset} getAllAssets={getAllAssets} getAssetDetails={getAssetDetails}/> :
-      detailsView ? <AssetDetails selectedAsset={selectedAsset} handleDetailsView={handleDetailsView} handleFormView={handleFormView} getAllAssets={getAllAssets}/> : 
+      {formIsShown? <AssetForm handleFormView={handleFormView} selectedAsset={selectedAsset} getAllAssets={getAllAssets} getAssetDetails={getAssetDetails} setStatus={setStatus} /> :
+      detailsView ? <AssetDetails selectedAsset={selectedAsset} handleDetailsView={handleDetailsView} handleFormView={handleFormView} getAllAssets={getAllAssets} status ={status} setStatus={setStatus} setMessage={setMessage} message={message}/> : 
       assets.length ?
       <>
         <button  onClick={()=>{setSelectedAsset(null); handleFormView();}}>Add Asset</button>
+        <div>{message}</div>
         <h1>Assets</h1>
         {assets.map((asset, index) => (
         <div key={index}>
