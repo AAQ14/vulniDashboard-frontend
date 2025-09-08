@@ -5,7 +5,7 @@ import VulnDetails from './VulnDetails/VulnDetails'
 import { FadeLoader } from 'react-spinners'
 import dayjs from 'dayjs'
 
-const Vulnerabilities = () => {
+const Vulnerabilities = ({username}) => {
       const [vulnerabilities, setVulnerabilities] = useState([])
       const [isFormOpen, setIsFormOpen] = useState(false)
       const [isDetailsOpen, setIsDetailsOpen] = useState(false)
@@ -56,7 +56,7 @@ const Vulnerabilities = () => {
   return (
     <>
       <br/>
-      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected} setStatus={setStatus}/> :
+      {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected} setStatus={setStatus} username={username}/> :
       isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} selected={selected} handleFormView={handleFormView} isFormOpen={isFormOpen} getAllVulns={getAllVulns} setStatus={setStatus} status={status} setMessage={setMessage} message={message}/>:
       vulnerabilities.length ? 
       <><h1>All Vulnerabilities</h1>

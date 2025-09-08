@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'))
   const [userId, setUserId] = useState(null)
+  const [username, setUsername] = useState(null)
 
   function handleLogin(newToken){
     setToken(newToken)
@@ -28,6 +29,7 @@ const App = () => {
   useEffect(()=>{    
     if(token){
     const decodedToken = jwtDecode(token)
+    setUsername(decodedToken.username)
     setUserId(decodedToken.id)
     }
 },[token])
@@ -43,7 +45,7 @@ const App = () => {
             <Route path="/login" element={<LoginForm onLogin={handleLogin}/>}/>
             <Route path="/signup" element={<SignupForm onLogin={handleLogin} />}/>
             <Route path="/assets" element={<ProtectedRoute><Assets /></ProtectedRoute>}/>
-            <Route path="/vulnerabilities" element={<ProtectedRoute> <Vulnerabilities /> </ProtectedRoute>}/>
+            <Route path="/vulnerabilities" element={<ProtectedRoute> <Vulnerabilities username={username}/> </ProtectedRoute>}/>
         </Routes>
       </BrowserRouter>
     </>
