@@ -30,7 +30,7 @@ const Vulnerabilities = () => {
       function displayMessage(){
         if(status == 'updated'){
             setMessage("vulnerability updated successfully")
-            setTimeout(()=>{setMessage(null)}, 3000)
+            setTimeout(()=>{setMessage(null);setStatus(null);}, 3000)
         }
          if(status == 'added'){
             setMessage("vulnerability created successfully")
@@ -67,7 +67,7 @@ const Vulnerabilities = () => {
     <>
       <br/>
       {isFormOpen ? <VulnerabilityForm handleFormView={handleFormView} getAllVulns={getAllVulns} selected={selected} setStatus={setStatus}/> :
-      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} />:
+      isDetailsOpen ? <VulnDetails handleDetailsView={handleDetailsView} selected={selected} />:
       vulnerabilities.length ? 
       <><h1>All Vulnerabilities</h1>
       <div>{message}</div>
@@ -77,13 +77,8 @@ const Vulnerabilities = () => {
             <p>title: {vuln.title}</p>
             <p>rating: {vuln.rating}</p>
             <p>score: {vuln.score}</p>
-            <p>description: {vuln.description}</p>
-            <p>asset: {vuln.asset?.name}</p>
-            <p>status: {vuln.status}</p>
-            <p>Discovered at: {dayjs(vuln.discoveredAt).format('YYYY/MM/DD HH:mm')}</p>
-            <p>resolved at: {vuln.resolvedAt==null? "not solved yet" : dayjs(vuln.resolvedAt).format('YYYY/MM/DD HH:mm')}</p>
 
-            <button onClick={handleDetailsView}>Details</button>
+            <button onClick={()=>{handleDetailsView(); handleSelected(vuln)}}>Details</button>
             
             <button onClick={async()=>{await deleteVuln(vuln._id); getAllVulns(); setStatus('deleted')}}>Delete</button>
 
