@@ -13,6 +13,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import{PieChart, Pie}from "recharts"
+import Chart from "react-apexcharts"
+import { FadeLoader } from "react-spinners";
 
 const Home = ({ userId }) => {
   console.log(userId);
@@ -20,6 +22,7 @@ const Home = ({ userId }) => {
 
   const [vulnerabilities, setVulnerabilities] = useState([]);
   const [assets, setAssets] = useState([])
+  const [vulnSeverty, setVulnSeverity] = useState([])
 
   const data = [
     {
@@ -118,19 +121,44 @@ const Home = ({ userId }) => {
       //     setSystem(res)
       // }
       setSystem(res);
+      console.log(res)
     } catch (err) {
       console.log(err);
     }
   }
 
   useEffect(() => {
-  getAssets();
-  },[]);
+  getAssets();getSystemDetails();
+  },[userId]);
 
-  console.log(system);
+  
+  console.log(system.lowSeverityVulns);
+  useEffect(()=>{setVulnSeverity([system.lowSeverityVulns, system.mediumSeverityVulns, system.highSeverityVulns, system.criticalSeverityVulns])},[system])
+  console.log(vulnSeverty)
   return (
     <>
-      {assets.map((asset,index)=>(
+      <h1>Pie chart</h1>
+      {vulnSeverty.length? 
+          <>
+          <p>hi</p>
+          <Chart 
+          type="pie"
+          width={700}
+         height={350} 
+         series={[vulnSeverty[0],vulnSeverty[1],vulnSeverty[2],vulnSeverty[3]]} 
+         options={{
+            title:{text: "Overall Vulnerabilities per severity percentage"},
+            noData :{text: "Empty Data"},
+            colors:["#F6DA63", "#EB8242", "#DA2D2D", "#9D0B0B"] ,
+            labels:['low severity', 'medium severity', 'high severity', 'critical severity']
+          } }>
+
+          </Chart>
+          </>
+      : <FadeLoader />}
+      
+
+      {assets?.map((asset,index)=>(
       <>{asset.name}<br/></>
       ))}
       <h1>HOME</h1>
@@ -187,6 +215,8 @@ const Home = ({ userId }) => {
         <Bar dataKey="vulnerabilities.critical" stackId="a" fill="#9D0B0B" maxBarSize={30} />
       </BarChart>
 
+       <div style={{ width: '100%', height: 300 }}>
+        <ResponsiveContainer>
       <BarChart
         width={500}
         height={300}
@@ -209,7 +239,8 @@ const Home = ({ userId }) => {
         <Bar dataKey="vulnerabilities.high" stackId="a" fill="#DA2D2D" maxBarSize={30} />
         <Bar dataKey="vulnerabilities.critical" stackId="a" fill="#9D0B0B" maxBarSize={30} />
       </BarChart>
-
+      </ResponsiveContainer>
+      </div>
       <div style={{ width: '100%', height: 300 }}>
         <ResponsiveContainer>
           <PieChart>
@@ -224,6 +255,9 @@ const Home = ({ userId }) => {
           </PieChart>
         </ResponsiveContainer>
       </div>
+
+      
+
     </>
   );
 };
