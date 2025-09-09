@@ -44,6 +44,8 @@ const Assets = ({username, userId}) => {
     }
   }
 
+
+
   function showMessage(){
     if(status == 'added'){
       setMessage('asset added successfully')
