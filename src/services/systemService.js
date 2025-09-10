@@ -23,18 +23,8 @@ const details = async(userId)=>{
     }
 }
 
-const update = async(userId)=>{
-    try {
-        const url= `${baseURI}/systems/update`
-        const res = await axios.put(url, userId)
-        return res
-    } catch (err) {
-        return err
-    }
-}
 
 export {
     create,
-    details,
-    update
+    details
 }
