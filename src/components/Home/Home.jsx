@@ -17,14 +17,13 @@ import { FadeLoader } from "react-spinners";
 import PieChart from "./PieChart/PieChart";
 import Fixed from "./Fixed/Fixed";
 
-const Home = ({ userId }) => {
+const Home = ({ userId}) => {
   console.log(userId);
   const [system, setSystem] = useState({});
 
   const [vulnerabilities, setVulnerabilities] = useState([]);
   const [assets, setAssets] = useState([])
-  const [vulnSeverty, setVulnSeverity] = useState(
-[5, 3, 7, 8])
+  const [vulnSeverty, setVulnSeverity] = useState([5, 3, 7, 8])
 
   async function getAllVulns() {
     try {
@@ -70,10 +69,12 @@ const Home = ({ userId }) => {
   console.log(vulnSeverty)
   return (
     <>
-      <h1>Pie chart</h1>
+      {userId  ? <>
+        <h1>Pie chart</h1>
       <Fixed system={system}/>
     
-      {vulnSeverty.length>0 && < PieChart vulnSeverty={vulnSeverty}/>}
+      
+      {vulnSeverty.length>0 && < PieChart vulnSeverty={vulnSeverty}/>}/
       {/* {vulnSeverty.length? 
           <>
           <p>hi</p>
@@ -136,7 +137,7 @@ const Home = ({ userId }) => {
         }}
         layout="vertical"
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="none"/>
+        <CartesianGrid strokeDasharray="3 3"/>
         <XAxis  type="number" stroke="black"/>
         <YAxis dataKey="name" type="category" stroke="black" fontSize={15}/>
         <Tooltip />
@@ -149,6 +150,8 @@ const Home = ({ userId }) => {
       {/* </ResponsiveContainer>
       </div>
        */}
+      </>: <h1>HOME PAGE</h1>}
+      
 
     </>
   );

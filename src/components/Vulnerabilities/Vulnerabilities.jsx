@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { index } from "../../services/vulnService";
+import { index, deleteVuln } from "../../services/vulnService";
 import VulnerabilityForm from "./VulnerabilityForm/VulnerabilityForm";
 import VulnDetails from "./VulnDetails/VulnDetails";
 import { FadeLoader } from "react-spinners";
@@ -53,6 +53,22 @@ const Vulnerabilities = ({ username, userId }) => {
   function handleSelected(vuln) {
     setSelected(vuln);
   }
+
+    async function handleDelete(vulnid)
+  {
+    // console.log(selected)
+    try {
+      const res = await deleteVuln(vulnid)
+      if(res.status == 200)
+      {
+        setStatus('deleted')
+        getAllVulns()
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 
   useEffect(() => {
     getAllVulns();
@@ -136,12 +152,12 @@ const Vulnerabilities = ({ username, userId }) => {
                       <td id="open"> {vuln.status} </td>
                     </div>
                   ) : vuln.status == "In progress" ? (
-                    <td id="Inprogress"> {vuln.status} </td>
+                    <td id="Inprogress"> <p> {vuln.status}</p> </td>
                   ) : (
                     <td id="Fixed"> {vuln.status} </td>
                   )}
                   {/* {vuln.status} */}
-                  <td><button>delete</button></td>
+                  <td><button onClick={async ()=>{await handleDelete(vuln._id)}}>DELETE</button></td>
                 </tr>
               </>
             ))}

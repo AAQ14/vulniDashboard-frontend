@@ -17,6 +17,7 @@ border: black solid    1px;
   padding: 0.6em;
 }
 #Fixed{
+    margin: 6px;
     padding: 2px;
     background-color: rgb(64, 122, 64);
 }
@@ -26,10 +27,9 @@ border: black solid    1px;
     background-color: rgb(178, 11, 11);
 }
 
-#Inprogress{
-    background-color: yellow;
-}
-
+/* #Inprogress{
+} */
+/* 
 tr :nth-child(2),
 tr :nth-child(3),
 tr :nth-child(1),
@@ -38,16 +38,68 @@ tr :nth-child(8)
  {
   text-align: center;
   width: 15%;
-}
+} */
 
-tr :nth-child(5),
+/* tr :nth-child(5),
 tr :nth-child(6),tr :nth-child(4)
  {
   text-align: center;
   width: 30%;
-}
+} */
 
+td{
+    text-align: center;
+    min-width: 70px;
+}
 .assets{
     border: black solid 1px;
     width: 300px;
+}
+
+td p {
+    padding: 4px;
+    margin: 2px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(237, 253, 110);
+    width: 100px;
+    border: 1px none solid;
+    border-radius:18px;
+}
+
+nav{
+    color: rgb(255, 255, 255);
+    text-align: left;
+    display: flex;
+    background-color: black;
+}
+
+nav ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 300px;
+    
+}
+
+nav li{
+    padding: 0px 17px;
+    text-align: right;
+}
+
+.logo{
+    font-size: 20px;
+    font-weight: 240px;
+    margin: auto;
+}
+
+.links{
+    margin: auto;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a{
+    color: aliceblue;
 }

@@ -57,7 +57,8 @@ const Assets = ({username, userId}) => {
      }
   }
 
-  useEffect(()=>{getAllAssets();getAssetDetails();showMessage()},[status])
+  useEffect(()=>{showMessage()},[status])
+  useEffect(()=>{getAllAssets();getAssetDetails();},[userId])
 
   return (
     <>
@@ -71,7 +72,7 @@ const Assets = ({username, userId}) => {
         <div>{message}</div>
         <h1>Assets</h1>
         {assets.map((asset, index) => (
-        <div class="assets" key={index}>
+        <div className="assets" key={index}>
           <p>name: {asset.name}</p>
           <p>type: {asset.type}</p>
           <button onClick={()=>{setSelectedAsset(asset);handleDetailsView();}}>details</button>

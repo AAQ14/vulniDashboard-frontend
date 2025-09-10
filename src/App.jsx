@@ -39,8 +39,7 @@ const App = () => {
     <>
       
       <BrowserRouter>
-      < NavBar token={token}/> 
-      {token ? <LogoutBtn onLogout={handleLogout} /> : null}
+      < NavBar token={token} handleLogout={handleLogout}/> 
         <Routes>
             <Route path="/" element={<Home userId={userId} />}/>
             <Route path="/login" element={<LoginForm onLogin={handleLogin}/>}/>

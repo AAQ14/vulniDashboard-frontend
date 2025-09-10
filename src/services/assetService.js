@@ -18,7 +18,9 @@ const assetIndex = async(userId) =>{
     try {
         const url = `${baseURI}/assets/${userId}`
         const res = await axios.get(url)
-        return res.data
+        if(res.status == 200){
+            return res.data
+        }
     } catch (err) {
         return err
     }
@@ -26,9 +28,11 @@ const assetIndex = async(userId) =>{
 
 const assetDetails = async (id) =>{
     try {
-        const url = `${baseURI}/assets/${id}` 
+        const url = `${baseURI}/assets/details/${id}` 
         const res = await axios.get(url)
-        return res.data      
+        if(res.status == 200){
+            return res.data      
+        }
     } catch (err) {
         return err
     }
@@ -38,7 +42,9 @@ const updateAsset = async(id, data) =>{
     try {
         const url = `${baseURI}/assets/update/${id}`
         const res = await axios.put(url, data)
-        return res
+        if(res.status == 200){
+            return res
+        }
     } catch (err) {
         return err        
     }
@@ -48,7 +54,9 @@ const deleteAsset = async(id) =>{
     try {
         const url = `${baseURI}/assets/delete/${id}`
         const res = await axios.delete(url)
-        return res
+        if(res.status == 200){
+            return res
+        }
     } catch (err) {
         return err
     }

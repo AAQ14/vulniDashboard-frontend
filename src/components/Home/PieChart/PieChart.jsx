@@ -6,7 +6,7 @@ import { FadeLoader } from 'react-spinners'
 const PieChart = ({vulnSeverty}) => {
   return (
     <>
-            {vulnSeverty.length? 
+          {vulnSeverty.length ? 
           <>
           <p>hi</p>
           <Chart 

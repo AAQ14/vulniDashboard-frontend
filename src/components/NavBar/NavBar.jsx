@@ -1,18 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router'
+import LogoutBtn from '../LogoutBtn/LogoutBtn'
 
 const NavBar = (props) => {
   return (
-    <>
-        <Link to="/">HOME</Link>
+    <>  
+        <nav>
+        <div className='logo'><p>VulniDashboard</p></div>
+        <div className='links'><ul>
+         <li><Link to="/">HOME</Link></li>
         {props.token ? <>
-        <Link to="/vulnerabilities">Vulnerabilities</Link>
-        <Link to="/assets">Assets</Link>
-        <Link to="/account">account</Link> </>: <>
-        <Link to="/login">Login</Link>
+        <li><Link to="/vulnerabilities">Vulnerabilities</Link></li>
+        <li><Link to="/assets">Assets</Link></li>
+        <li><Link to="/account">account</Link></li>
+        <li><LogoutBtn onLogout={props.handleLogout} /></li>
+         </>: <>
+        <li><Link to="/login">Login</Link></li>
         </>}
+        </ul></div>
         
+        </nav>
+      
         
+      
         
     </>
   )
