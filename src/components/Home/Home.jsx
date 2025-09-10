@@ -12,9 +12,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import{PieChart, Pie}from "recharts"
 import Chart from "react-apexcharts"
 import { FadeLoader } from "react-spinners";
+import PieChart from "./PieChart/PieChart";
 
 const Home = ({ userId }) => {
   console.log(userId);
@@ -22,76 +22,8 @@ const Home = ({ userId }) => {
 
   const [vulnerabilities, setVulnerabilities] = useState([]);
   const [assets, setAssets] = useState([])
-  const [vulnSeverty, setVulnSeverity] = useState([])
-
-  const data = [
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
-
-  const secondData = [
-    {
-      name: "A",
-      value: 5,
-    },
-    {
-      name: "B",
-      value: 10,
-    },
-    {
-      name: "C",
-      value: 15,
-    },
-    {
-      name: "D",
-      value: 20,
-    },
-  ];
-
-  const thirdData = [
-  { name: 'Group A', value: 400 }, { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 }, { name: 'Group D', value: 200 },
-]
+  const [vulnSeverty, setVulnSeverity] = useState(
+[5, 3, 7, 8])
 
   async function getAllVulns() {
     try {
@@ -138,7 +70,9 @@ const Home = ({ userId }) => {
   return (
     <>
       <h1>Pie chart</h1>
-      {vulnSeverty.length? 
+
+      {vulnSeverty.length>0 && < PieChart vulnSeverty={vulnSeverty}/>}
+      {/* {vulnSeverty.length? 
           <>
           <p>hi</p>
           <Chart 
@@ -155,18 +89,18 @@ const Home = ({ userId }) => {
 
           </Chart>
           </>
-      : <FadeLoader />}
+      : <FadeLoader />} */}
       
 
       {assets?.map((asset,index)=>(
       <>{asset.name}<br/></>
       ))}
       <h1>HOME</h1>
-      {console.log(data)}
-      <BarChart
+       
+<BarChart
         width={500}
         height={300}
-        data={data}
+        data={assets}
         margin={{
           top: 20,
           right: 30,
@@ -176,37 +110,8 @@ const Home = ({ userId }) => {
         // layout="vertical"
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" type="category" />
-        <YAxis  />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-        <Bar dataKey="amt" stackId="a" fill="#82ca9d" />
-        <Bar dataKey="uv" fill="#ffc658" />
-      </BarChart>
-
-      {/* <BarChart width={500} height={300} data={secondData} layout="vertical">
-        <XAxis dataKey="name" type="category" />
-        <YAxis dataKey="value" type="number" />
-        <Bar dataKey="name" fill="#8884d8" />
-        <Tooltip />
-      </BarChart> */}
-       
-<BarChart
-        width={500}
-        height={300}
-        data={assets}
-        margin={{
-          top: 5,
-          right: 20,
-          left: 20,
-          bottom: 5,
-        }}
-        // layout="vertical"
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" type="category" />
-        <YAxis />
+        <XAxis dataKey="name" type="category" fontSize={10} stroke="black"/>
+        <YAxis stroke="black"/>
         <Tooltip />
         <Legend />
         <Bar dataKey="vulnerabilities.low" stackId="a" fill="#F6DA63" maxBarSize={30}/>
@@ -215,48 +120,33 @@ const Home = ({ userId }) => {
         <Bar dataKey="vulnerabilities.critical" stackId="a" fill="#9D0B0B" maxBarSize={30} />
       </BarChart>
 
-       <div style={{ width: '100%', height: 300 }}>
-        <ResponsiveContainer>
+       {/* <div style={{ width: '100%', height: 300 }}>
+        <ResponsiveContainer> */}
       <BarChart
         width={500}
         height={300}
         data={assets}
         margin={{
           top: 2,
-          right: 60,
+          right: 30,
           left: 60,
-          bottom: 3,
+          bottom: -20,
         }}
         layout="vertical"
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis  type="number"/>
-        <YAxis dataKey="name" type="category"/>
+        <CartesianGrid strokeDasharray="3 3" stroke="none"/>
+        <XAxis  type="number" stroke="black"/>
+        <YAxis dataKey="name" type="category" stroke="black" fontSize={15}/>
         <Tooltip />
         <Legend />
-        <Bar dataKey="vulnerabilities.low" stackId="a" fill="#F6DA63" maxBarSize={30}/>
-        <Bar dataKey="vulnerabilities.medium" stackId="a" fill="#EB8242" maxBarSize={30}/>
-        <Bar dataKey="vulnerabilities.high" stackId="a" fill="#DA2D2D" maxBarSize={30} />
-        <Bar dataKey="vulnerabilities.critical" stackId="a" fill="#9D0B0B" maxBarSize={30} />
+        <Bar dataKey="vulnerabilities.low" stackId="a" fill="#F6DA63" maxBarSize={25}/>
+        <Bar dataKey="vulnerabilities.medium" stackId="a" fill="#EB8242" maxBarSize={25}/>
+        <Bar dataKey="vulnerabilities.high" stackId="a" fill="#DA2D2D" maxBarSize={25} />
+        <Bar dataKey="vulnerabilities.critical" stackId="a" fill="#9D0B0B" maxBarSize={25} />
       </BarChart>
-      </ResponsiveContainer>
+      {/* </ResponsiveContainer>
       </div>
-      <div style={{ width: '100%', height: 300 }}>
-        <ResponsiveContainer>
-          <PieChart>
-            <Pie dataKey="value" 
-            data={thirdData} 
-            fill="#8884d8" 
-            label="name"    
-            />
-            <text x={400} y={200} textAnchor="middle" dominantBaseline="middle">
-    Donut
-   </text>
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-
-      
+       */}
 
     </>
   );

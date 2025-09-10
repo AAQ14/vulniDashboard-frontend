@@ -11,9 +11,10 @@ const add = async(data) =>{
     }
 }
 
-const index = async() =>{
+const index = async(userId) =>{
     try {
-        const url = `${baseURI}/vulnerabilities/`
+        const url = `${baseURI}/vulnerabilities/${userId}`
+        console.log(url)
         const res = await axios.get(url)
         return res.data
     } catch (err) {

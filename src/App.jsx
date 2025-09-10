@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router'
 import { useState } from 'react'
+import './App.css'
 
 import SignupForm from './components/SignupForm/SignupForm'
 import LoginForm from './components/LoginForm/LoginForm'
