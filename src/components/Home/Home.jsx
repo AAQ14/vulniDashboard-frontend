@@ -15,6 +15,7 @@ import {
 import Chart from "react-apexcharts"
 import { FadeLoader } from "react-spinners";
 import PieChart from "./PieChart/PieChart";
+import Fixed from "./Fixed/Fixed";
 
 const Home = ({ userId }) => {
   console.log(userId);
@@ -37,7 +38,7 @@ const Home = ({ userId }) => {
 
   async function getAssets() {
     try {
-      const res = await assetIndex()
+      const res = await assetIndex(userId)
       setAssets(res)
     } catch (err) {
       return err
@@ -70,7 +71,8 @@ const Home = ({ userId }) => {
   return (
     <>
       <h1>Pie chart</h1>
-
+      <Fixed system={system}/>
+    
       {vulnSeverty.length>0 && < PieChart vulnSeverty={vulnSeverty}/>}
       {/* {vulnSeverty.length? 
           <>
