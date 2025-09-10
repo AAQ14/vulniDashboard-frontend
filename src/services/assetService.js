@@ -14,9 +14,9 @@ const addAsset= async(data) =>{
     }
 }
 
-const assetIndex = async() =>{
+const assetIndex = async(userId) =>{
     try {
-        const url = `${baseURI}/assets/`
+        const url = `${baseURI}/assets/${userId}`
         const res = await axios.get(url)
         return res.data
     } catch (err) {

@@ -16,7 +16,7 @@ const Assets = ({username, userId}) => {
  
   async function getAllAssets() {
     try {
-      const allAssets = await assetIndex()
+      const allAssets = await assetIndex(userId)
       setAssets(allAssets)
       
     } catch (err) {
